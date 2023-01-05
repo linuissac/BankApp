@@ -5,6 +5,6 @@
  */
 
 import * as loadingActions from './loadingActions';
-import * as loginActions from './loginActions';
+import * as loginActions from './appActions';
 
 export const ActionCreators = Object.assign({}, loadingActions, loginActions);
