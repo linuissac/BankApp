@@ -15,10 +15,11 @@ import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PreLoadingScreen from '../screens/PreLoadingScreen';
 
-import Constants from "../config/Constants"
+import Constants from '../config/Constants';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 const Token = () => {
   return null;
 };
@@ -28,6 +29,19 @@ const Register = () => {
 };
 const More = () => {
   return null;
+};
+
+const LoginStack = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="home"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="login" component={LoginScreen} />
+    </Stack.Navigator>
+  );
 };
 function MyTabs() {
   return (
@@ -57,9 +71,7 @@ function MyTabs() {
               name={iconName}
               size={22}
               color={
-                focused
-                  ? Constants.APP_THEME_COLOR
-                  : Constants.APP_GREY_COLOR
+                focused ? Constants.APP_THEME_COLOR : Constants.APP_GREY_COLOR
               }
             />
           );
@@ -82,7 +94,7 @@ function MyTabs() {
       <Tab.Screen
         options={{headerShown: false}}
         name="Insurance"
-        component={HomeScreen}
+        component={LoginStack}
       />
       <Tab.Screen
         options={{headerShown: false}}

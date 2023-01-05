@@ -16,6 +16,10 @@ export default Constants = {
   APP_BLACK_COLOR: 'rgb(58,58,58)',
   APP_SNOW_WHITE_COLOR: 'rgb(248,244,239)',
   APP_GREY_COLOR: 'rgb(91,89,87)',
+  APP_WHITE_COLOR: 'rgb(255,255,255)',
+  APP_LIGHT_GREY_COLOR: 'rgb(229,229,231)',
+  APP_RED_FONT: 'rgb(229,30,29)',
+  APP_YELLOW_BORDER: ' rgb(200,176,78)',
 
   SCREEN_WIDTH: width,
   SCREEN_HEIGHT: height,

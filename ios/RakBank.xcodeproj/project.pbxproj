@@ -45,6 +45,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-RakBank-RakBankTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RakBank-RakBankTests.release.xcconfig"; path = "Target Support Files/Pods-RakBank-RakBankTests/Pods-RakBank-RakBankTests.release.xcconfig"; sourceTree = "<group>"; };
 		B36A05CF2966D6BE00E961BF /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		B36A05D12966D6DA00E961BF /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		B36A05D4296716E000E961BF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -143,6 +144,7 @@
 		B36A05CE2966CFFC00E961BF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B36A05D4296716E000E961BF /* MaterialCommunityIcons.ttf */,
 				B36A05D12966D6DA00E961BF /* MaterialIcons.ttf */,
 				B36A05CF2966D6BE00E961BF /* FontAwesome.ttf */,
 			);

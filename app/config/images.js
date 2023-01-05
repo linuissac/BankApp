@@ -4,11 +4,11 @@
  * Images - App config for images
  */
 
-const images = {
+const Images = {
   AppLogo: require('../assets/images/logo.png'),
   AppOnboardingLogo: require('../assets/images/onboardingLogo.png'),
-  AppBackgroundImage: require('../assets/images/bg.svg'),
+  AppBackgroundImage: require('../assets/images/bg.png'),
   accountsImage: require('../assets/images/accounts.png'),
   biometricImage: require('../assets/images/biometric.png'),
 };
-export default images;
+export default Images;

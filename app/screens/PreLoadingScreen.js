@@ -35,15 +35,15 @@ class PreLoadingScreen extends Component {
   _handleConnectivityChange = state => {
     let networkStatus = state.isConnected;
     this.props.onNetworkStatusChange(networkStatus);
-    this._checkAppIntroStatus()
+    this._checkAppIntroStatus();
   };
 
-  _checkAppIntroStatus = ()=>{
+  _checkAppIntroStatus = () => {
     const {isNetworkAvailable} = this.props;
-    if(isNetworkAvailable){
-        this.props.navigation.navigate('home');
+    if (isNetworkAvailable) {
+      this.props.navigation.navigate('home');
     }
-  }
+  };
 
   render() {
     const {isNetworkAvailable} = this.props;
@@ -51,7 +51,7 @@ class PreLoadingScreen extends Component {
       <SafeAreaView
         style={{flex: 1, backgroundColor: Constants.APP_THEME_COLOR}}>
         <StatusBar
-          barStyle="light-content"
+          barStyle="dark-content"
           backgroundColor="transparent"
           translucent={true}
         />
