@@ -2,11 +2,12 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 import Constants from '../../config/Constants';
 
-const Button = ({buttonName, didTapOnButton}) => {
+const Button = ({buttonName, didTapOnButton, disabled, buttonColor}) => {
   return (
     <TouchableOpacity
-      style={styles.buttonContainerStyle}
-      onPress={didTapOnButton && didTapOnButton}>
+      style={[styles.buttonContainerStyle, {backgroundColor: buttonColor}]}
+      onPress={didTapOnButton && didTapOnButton}
+      disabled={disabled}>
       <Text style={styles.buttonTextStyle}>{buttonName}</Text>
     </TouchableOpacity>
   );
@@ -14,7 +15,6 @@ const Button = ({buttonName, didTapOnButton}) => {
 
 const styles = StyleSheet.create({
   buttonContainerStyle: {
-    backgroundColor: Constants.APP_BLACK_COLOR,
     alignItems: 'center',
     justifyContent: 'center',
     width: '80%',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     color: Constants.APP_WHITE_COLOR,
     fontWeight: '600',
     letterSpacing: 1,
-    paddingVertical:18
+    paddingVertical: 18,
   },
 });
 export default Button;

@@ -10,5 +10,6 @@ const Images = {
   AppBackgroundImage: require('../assets/images/bg.png'),
   accountsImage: require('../assets/images/accounts.png'),
   biometricImage: require('../assets/images/biometric.png'),
+  gif:require('../assets/images/bg.gif')
 };
 export default Images;

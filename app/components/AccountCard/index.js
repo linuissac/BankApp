@@ -3,13 +3,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Constants from '../../config/Constants';
 import Images from '../../config/Images';
 
-const AccountCard = ({didTapOnButton, footerText,headerText}) => {
+const AccountCard = ({didTapOnButton, footerText, headerText}) => {
   return (
     <View style={styles.cardContainerStyle}>
       <View style={styles.headerConatinerStyle}>
-        <Text style={styles.accountTextStyle}>
-          {headerText}
-        </Text>
+        <Text style={styles.accountTextStyle}>{headerText}</Text>
         <Image
           source={Images.accountsImage}
           style={styles.accountImageStyle}
@@ -28,11 +26,11 @@ const AccountCard = ({didTapOnButton, footerText,headerText}) => {
 const styles = StyleSheet.create({
   cardContainerStyle: {
     backgroundColor: Constants.APP_LIGHT_GREY_COLOR,
-    marginBottom: 20,
-    width: '80%',
+    width: '100%',
     alignSelf: 'center',
     borderRadius: 22,
     overflow: 'hidden',
+    marginVertical:20
   },
   headerConatinerStyle: {
     backgroundColor: Constants.APP_LIGHT_GREY_COLOR,

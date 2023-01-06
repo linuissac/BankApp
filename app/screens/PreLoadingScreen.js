@@ -50,11 +50,6 @@ class PreLoadingScreen extends Component {
     return (
       <SafeAreaView
         style={{flex: 1, backgroundColor: Constants.APP_THEME_COLOR}}>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor="transparent"
-          translucent={true}
-        />
         <ImageBackground>
           <View style={styles.viewConatiner}>
             {!isNetworkAvailable && (

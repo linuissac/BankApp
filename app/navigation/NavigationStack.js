@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 /** Screens */
 import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
 import PreLoadingScreen from '../screens/PreLoadingScreen';
 
 import Constants from '../config/Constants';
@@ -29,19 +28,6 @@ const Register = () => {
 };
 const More = () => {
   return null;
-};
-
-const LoginStack = () => {
-  return (
-    <Stack.Navigator
-      initialRouteName="home"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <Stack.Screen name="home" component={HomeScreen} />
-      <Stack.Screen name="login" component={LoginScreen} />
-    </Stack.Navigator>
-  );
 };
 function MyTabs() {
   return (
@@ -88,13 +74,13 @@ function MyTabs() {
         },
         activeTintColor: Constants.APP_THEME_COLOR,
         inactiveTintColor: Constants.APP_GREY_COLOR,
-        keyboardHidesTabBar: true,
+        keyboardHidesTabBar: false,
         backBehavior: 'none ',
       }}>
       <Tab.Screen
         options={{headerShown: false}}
         name="Insurance"
-        component={LoginStack}
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{headerShown: false}}

@@ -71,31 +71,26 @@ export default class FloatingTextInput extends Component {
 
   _returnAnimatedTitleStyles = () => {
     const {isFieldActive} = this.state;
-    const {
-      titleActiveColor,
-      titleInactiveColor,
-      titleActiveSize,
-      titleInActiveSize,
-    } = this.props;
 
     return {
       top: this.position.interpolate({
         inputRange: [0, 1],
         outputRange: [14, 0],
       }),
-      fontSize: isFieldActive ? titleActiveSize : titleInActiveSize,
-      color: isFieldActive ? titleActiveColor : titleInactiveColor,
+      fontSize: isFieldActive ? 14 : 16,
+      color: isFieldActive
+        ? Constants.APP_GREY_COLOR
+        : Constants.APP_LIGHT_GREY_COLOR,
     };
   };
 
   render() {
     const {isFieldActive} = this.state;
-
     return (
-      <View style={[Styles.container, this.props.containerStyle]}>
+      <View style={Styles.container}>
         <TouchableOpacity
           activeOpacity={0.5}
-          style={[Styles.container, this.props.containerStyle1]}
+          style={Styles.container}
           onPress={() => {
             this.textInputRef.focus();
           }}>
@@ -147,16 +142,16 @@ const Styles = StyleSheet.create({
   container: {
     width: '100%',
     borderRadius: 10,
-    paddingVertical:8,
-    backgroundColor: 'rgba(216,96,17,0.5)',
+    backgroundColor: Constants.APP_WHITE_COLOR,
     alignSelf: 'center',
+    marginBottom: 20,
   },
   textInput: {
     marginTop: 25,
     color: Constants.APP_BLACK_COLOR,
     marginHorizontal: 10,
     fontSize: 16,
-    height: 35,
+    height: 40,
 
     borderBottomWidth: 1,
   },
