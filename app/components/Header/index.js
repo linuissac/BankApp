@@ -25,7 +25,7 @@ const Header = ({didTapOnBackButton, didTapOnRememberLogin, rememberLogin}) => {
         hitSlop={{top: 20, left: 20, right: 20, bottom: 20}}>
         <Icon
           name={'arrow-back-ios'}
-          size={25}
+          size={22}
           color={Constants.APP_WHITE_COLOR}
           style={{fontWeight: '600'}}
         />
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   checkboxTextStyle: {
     color: Constants.APP_WHITE_COLOR,
-    fontSize: 15,
+    fontSize: 12,
     margin: 8,
   },
 });

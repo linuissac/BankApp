@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.APP_SNOW_WHITE_COLOR,
   },
   viewContainer: {
-    marginTop: 40,
+    marginTop: 30,
     marginHorizontal: 30,
   },
   biometricContainerStyle: {

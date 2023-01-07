@@ -45,7 +45,7 @@ class PreLoadingScreen extends Component {
 
     if (isNetworkAvailable) {
       DeviceInfo.getIpAddress().then(ip => {
-        this.props.saveDeviceDetails(ip);
+        this.props.saveDeviceIp(ip);
       });
       DeviceInfo.getDeviceName().then(deviceName => {
         this.props.saveDeviceName(deviceName);

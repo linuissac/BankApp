@@ -14,6 +14,7 @@ import {
   Keyboard,
   Animated,
   Platform,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -44,6 +45,7 @@ class HomeScreen extends Component {
       isInputFocused: false,
       latitude: 0,
       longitude: 0,
+      imei: '',
     };
   }
   componentDidMount() {
@@ -54,7 +56,29 @@ class HomeScreen extends Component {
       this.setState({isInputFocused: false});
     });
     this._didTapOnCurrentLocation();
+    this.getIMEI();
   }
+
+  getIMEI = async () => {
+    try {
+      const granted = await request(PERMISSIONS.ANDROID.READ_PHONE_STATE, {
+        title: 'RAKBANK wants to READ_PHONE_STATE',
+        message: 'RAKBANKApp needs access to your personal data. ',
+      });
+      if (granted === RESULTS.GRANTED) {
+        const IMEI = require('react-native-imei');
+        IMEI.getImei().then(imeiList => {
+          this.setState({imei: imeiList});
+          console.log('IMEEEEIIIII', imeiList);
+        });
+        alert('Permission Granted.');
+      } else {
+        console.log('Permission Not Granted');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
 
   _didTapOnBackButton = () => {
     this.setState({
@@ -97,7 +121,7 @@ class HomeScreen extends Component {
               );
               break;
             case 'blocked':
-              showAlertWithCallback(
+              Alert(
                 'Please give permission access your location.',
                 'Open settings',
                 'Cancel',
@@ -149,7 +173,7 @@ class HomeScreen extends Component {
               );
               break;
             case RESULTS.BLOCKED:
-              showAlertWithCallback(
+              Alert(
                 'Please give permission access your location.',
                 'Open settings',
                 'Cancel',
@@ -193,7 +217,7 @@ class HomeScreen extends Component {
   };
 
   _didTapOnRequestLogin = () => {
-    const {userID, password, latitude, longitude} = this.state;
+    const {userID, password, latitude, longitude, imei} = this.state;
     const {deviceIP, deviceNAME, deviceMAC} = this.props;
 
     let params = {
@@ -203,16 +227,24 @@ class HomeScreen extends Component {
       device_name: deviceNAME,
       device_MAC_address: deviceMAC,
       ip_address: deviceIP,
-      imei: '79256975976967',
+      imei: imei,
       gps: {latitude, longitude},
     };
     this.props.onRequestLogin(params);
   };
 
   _renderLoginForm = () => {
-    const {userID, password, showPassword, rememberLogin} = this.state;
+    const {
+      userID,
+      password,
+      showPassword,
+      rememberLogin,
+      isInputFocused,
+      isLoginModeEnabled,
+    } = this.state;
+
     return (
-      <>
+      <View style={{marginTop: isInputFocused ? 40 : 0}}>
         <Header
           didTapOnBackButton={this._didTapOnBackButton}
           didTapOnRememberLogin={this._didTapOnRememberLogin}
@@ -241,7 +273,7 @@ class HomeScreen extends Component {
               this.setState({isInputFocused: true});
               setTimeout(() => {
                 this.scroll.scrollTo({
-                  y: 80,
+                  y: 120,
                   animated: true,
                 });
               }, 1);
@@ -279,8 +311,29 @@ class HomeScreen extends Component {
               </TouchableOpacity>
             )}
           </View>
+          {isInputFocused && this._renderButton()}
         </View>
-      </>
+      </View>
+    );
+  };
+  _renderButton = () => {
+    const {isLoginModeEnabled} = this.state;
+    let isDisabled = this.state.userID !== '' && this.state.password !== '';
+    return (
+      <Button
+        buttonName="Login"
+        didTapOnButton={
+          isLoginModeEnabled
+            ? this._didTapOnRequestLogin
+            : this._didTapOnEnableLoginForm
+        }
+        disabled={isLoginModeEnabled && !isDisabled}
+        buttonColor={
+          isLoginModeEnabled && !isDisabled
+            ? Constants.APP_DIM_GREY_COLOR
+            : Constants.APP_GREY_COLOR
+        }
+      />
     );
   };
 
@@ -318,8 +371,10 @@ class HomeScreen extends Component {
   };
 
   render() {
-    const {isLoginModeEnabled} = this.state;
+    const {isLoginModeEnabled, isInputFocused} = this.state;
     const {isLoading} = this.props;
+    let isDisabled = this.state.userID !== '' && this.state.password !== '';
+
     return (
       <>
         <KeyboardAwareScrollView
@@ -334,7 +389,7 @@ class HomeScreen extends Component {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.mainContainer}>
               <ImageBackground
-                source={require('../../assets/images/newGif.gif')}
+                source={Images.gif}
                 style={styles.backgroundImageStyle}
                 resizeMode={'stretch'}>
                 {isLoginModeEnabled
@@ -343,20 +398,8 @@ class HomeScreen extends Component {
               </ImageBackground>
 
               <View style={styles.viewContainer}>
-                <Button
-                  buttonName="Login"
-                  didTapOnButton={
-                    isLoginModeEnabled
-                      ? this._didTapOnRequestLogin
-                      : this._didTapOnEnableLoginForm
-                  }
-                  // disabled={isLoginModeEnabled}
-                  buttonColor={
-                    isLoginModeEnabled
-                      ? Constants.APP_DIM_GREY_COLOR
-                      : Constants.APP_GREY_COLOR
-                  }
-                />
+                {!isInputFocused && this._renderButton()}
+
                 {!isLoginModeEnabled && (
                   <TouchableOpacity
                     style={styles.biometricContainerStyle}

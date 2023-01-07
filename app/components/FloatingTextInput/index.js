@@ -187,7 +187,7 @@ const Styles = StyleSheet.create({
     marginBottom: 20,
   },
   textInput: {
-    marginTop: 25,
+    marginTop: 20,
     color: Constants.APP_BLACK_COLOR,
     marginHorizontal: 10,
     fontSize: 16,
@@ -197,7 +197,7 @@ const Styles = StyleSheet.create({
   },
   titleStyles: {
     position: 'absolute',
-    fontSize: 16,
+    fontSize: 14,
     color: Constants.APP_WHITE_COLOR,
     marginHorizontal: 10,
     marginTop: 0,

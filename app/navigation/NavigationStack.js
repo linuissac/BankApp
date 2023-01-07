@@ -62,8 +62,6 @@ function MyTabs() {
             />
           );
         },
-      })}
-      tabBarOptions={{
         style: {
           backgroundColor: Constants.APP_BLACK_COLOR,
           elevation: 10,
@@ -76,7 +74,8 @@ function MyTabs() {
         inactiveTintColor: Constants.APP_GREY_COLOR,
         keyboardHidesTabBar: false,
         backBehavior: 'none ',
-      }}>
+      })}
+   >
       <Tab.Screen
         options={{headerShown: false}}
         name="Insurance"

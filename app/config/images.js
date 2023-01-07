@@ -9,6 +9,6 @@ const Images = {
   AppOnboardingLogo: require('../assets/images/onboardingLogo.png'),
   AppBackgroundImage: require('../assets/images/bg.png'),
   accountsImage: require('../assets/images/accounts.png'),
-  gif:require('../assets/images/bg.gif')
+  gif:require('../assets/images/newGif.gif')
 };
 export default Images;

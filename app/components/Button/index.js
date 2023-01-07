@@ -17,16 +17,16 @@ const styles = StyleSheet.create({
   buttonContainerStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: '80%',
+    width: '100%',
     borderRadius: 26,
     alignSelf: 'center',
+    height: 50,
   },
   buttonTextStyle: {
     fontSize: 22,
     color: Constants.APP_WHITE_COLOR,
     fontWeight: '600',
     letterSpacing: 1,
-    paddingVertical: 18,
   },
 });
 export default Button;
