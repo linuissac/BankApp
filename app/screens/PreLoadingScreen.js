@@ -7,16 +7,20 @@
 import {
   View,
   StatusBar,
-  SafeAreaView,
   StyleSheet,
   Text,
   ImageBackground,
+  Image,
 } from 'react-native';
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import Constants from '../config/Constants';
 import NetInfo from '@react-native-community/netinfo';
+import DeviceInfo from 'react-native-device-info';
+
 import * as appActions from '../actions/appActions';
+
+import Images from '../config/Images';
 
 class PreLoadingScreen extends Component {
   constructor(props) {
@@ -30,8 +34,6 @@ class PreLoadingScreen extends Component {
     });
   }
 
-  componentWillUnmount() {}
-
   _handleConnectivityChange = state => {
     let networkStatus = state.isConnected;
     this.props.onNetworkStatusChange(networkStatus);
@@ -40,26 +42,40 @@ class PreLoadingScreen extends Component {
 
   _checkAppIntroStatus = () => {
     const {isNetworkAvailable} = this.props;
+
     if (isNetworkAvailable) {
-      this.props.navigation.navigate('home');
+      DeviceInfo.getIpAddress().then(ip => {
+        this.props.saveDeviceDetails(ip);
+      });
+      DeviceInfo.getDeviceName().then(deviceName => {
+        this.props.saveDeviceName(deviceName);
+      });
+      DeviceInfo.getMacAddress().then(mac => {
+        this.props.saveDeviceMac(mac);
+      });
+      setTimeout(() => {
+        this.props.navigation.navigate('home');
+      }, 2000);
     }
   };
 
   render() {
     const {isNetworkAvailable} = this.props;
     return (
-      <SafeAreaView
-        style={{flex: 1, backgroundColor: Constants.APP_THEME_COLOR}}>
-        <ImageBackground>
-          <View style={styles.viewConatiner}>
-            {!isNetworkAvailable && (
-              <Text style={styles.textStyle}>
-                PLEASE CHECK YOUR NETWORK CONNECTIVITY!!
-              </Text>
-            )}
-          </View>
+      <View style={styles.viewConatiner}>
+        <StatusBar barStyle="light-content" />
+        <ImageBackground
+          source={Images.AppBackgroundImage}
+          style={styles.backgroundImageStyle}>
+          {!isNetworkAvailable ? (
+            <Text style={styles.textStyle}>
+              PLEASE CHECK YOUR NETWORK CONNECTIVITY!!
+            </Text>
+          ) : (
+            <Image source={Images.AppOnboardingLogo} />
+          )}
         </ImageBackground>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -75,6 +91,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
+  backgroundImageStyle: {
+    height: '100%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 function mapStateToProps(state) {
@@ -87,6 +109,15 @@ function mapDispatchToProps(dispatch) {
   return {
     onNetworkStatusChange: networkStatus => {
       dispatch(appActions.onNetworkStatusChange(networkStatus));
+    },
+    saveDeviceIp: params => {
+      dispatch(appActions.saveDeviceIp(params));
+    },
+    saveDeviceName: params => {
+      dispatch(appActions.saveDeviceName(params));
+    },
+    saveDeviceMac: params => {
+      dispatch(appActions.saveDeviceMac(params));
     },
   };
 }

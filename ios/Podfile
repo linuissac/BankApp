@@ -1,5 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+permissions_path = '../node_modules/react-native-permissions/ios'
 
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
@@ -7,6 +8,9 @@ install! 'cocoapods', :deterministic_uuids => false
 target 'RakBank' do
   config = use_native_modules!
 
+
+  pod 'Permission-LocationAccuracy', :path => "#{permissions_path}/LocationAccuracy"
+  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
   # Flags change depending on the env values.
   flags = get_default_flags()
 
@@ -18,6 +22,7 @@ target 'RakBank' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+ 
 
   target 'RakBankTests' do
     inherit! :complete

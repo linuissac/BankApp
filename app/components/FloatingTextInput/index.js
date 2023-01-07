@@ -6,24 +6,24 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {string, func, object, number} from 'prop-types';
+// import {string, func, object, number} from 'prop-types';
 import Constants from '../../config/Constants';
 
 export default class FloatingTextInput extends Component {
-  static propTypes = {
-    attrName: string.isRequired,
-    title: string.isRequired,
-    value: string.isRequired,
-    updateMasterState: func.isRequired,
-    keyboardType: string,
-    titleActiveSize: number, // to control size of title when field is active
-    titleInActiveSize: number, // to control size of title when field is inactive
-    titleActiveColor: string, // to control color of title when field is active
-    titleInactiveColor: string, // to control color of title when field is active
-    textInputStyles: object,
-    otherTextInputProps: object,
-    focus: string.isRequired,
-  };
+  // static propTypes = {
+  //   attrName: string.isRequired,
+  //   title: string.isRequired,
+  //   value: string.isRequired,
+  //   updateMasterState: func.isRequired,
+  //   keyboardType: string,
+  //   titleActiveSize: number, // to control size of title when field is active
+  //   titleInActiveSize: number, // to control size of title when field is inactive
+  //   titleActiveColor: string, // to control color of title when field is active
+  //   titleInactiveColor: string, // to control color of title when field is active
+  //   textInputStyles: object,
+  //   otherTextInputProps: object,
+  //   focus: string.isRequired,
+  // };
 
   static defaultProps = {
     keyboardType: 'default',
@@ -41,9 +41,25 @@ export default class FloatingTextInput extends Component {
     this.position = new Animated.Value(value ? 1 : 0);
     this.state = {
       isFieldActive: false,
+      scaleValue: new Animated.Value(0),
+      bounceValue: new Animated.Value(200),
     };
   }
-
+  componentDidMount() {
+    Animated.timing(this.state.scaleValue, {
+      toValue: 1,
+      duration: 200,
+      // easing: Easing.ease,
+      useNativeDriver: true,
+    }).start();
+    Animated.spring(this.state.bounceValue, {
+      toValue: 0,
+      duration: 2000,
+      // friction: 3,
+      // tension: 3,
+      useNativeDriver: true,
+    }).start();
+  }
   _handleFocus = () => {
     if (!this.state.isFieldActive) {
       this.setState({isFieldActive: true});
@@ -52,6 +68,7 @@ export default class FloatingTextInput extends Component {
         duration: 150,
       }).start();
     }
+    this.props.onFocus();
   };
 
   _handleBlur = () => {
@@ -87,7 +104,30 @@ export default class FloatingTextInput extends Component {
   render() {
     const {isFieldActive} = this.state;
     return (
-      <View style={Styles.container}>
+      <Animated.View
+        style={[
+          Styles.container,
+          {
+            transform: [
+              {
+                translateY: this.state.bounceValue,
+              },
+              {
+                scaleX: this.state.scaleValue.interpolate({
+                  inputRange: [0, 0.8],
+                  outputRange: [0.8, 1],
+                }),
+              },
+
+              {
+                scaleY: this.state.scaleValue.interpolate({
+                  inputRange: [0, 0.8],
+                  outputRange: [0.8, 1],
+                }),
+              },
+            ],
+          },
+        ]}>
         <TouchableOpacity
           activeOpacity={0.5}
           style={Styles.container}
@@ -133,7 +173,7 @@ export default class FloatingTextInput extends Component {
             {...this.props.otherTextInputProps}
           />
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     );
   }
 }

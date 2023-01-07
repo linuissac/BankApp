@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.APP_SNOW_WHITE_COLOR,
   },
   viewContainer: {
-    // backgroundColor: Constants.APP_SNOW_WHITE_COLOR,
     marginTop: 40,
     marginHorizontal: 30,
   },
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
   },
   backgroundImageStyle1: {
     width: Constants.SCREEN_WIDTH,
-    height: (Constants.SCREEN_HEIGHT * 50) / 100,
+    height: (Constants.SCREEN_HEIGHT * 45) / 100,
   },
   textInputContainerStyle: {
     flexDirection: 'row',
@@ -80,6 +79,9 @@ const styles = StyleSheet.create({
   passwordTextStyle: {
     color: Constants.APP_GREY_COLOR,
     fontSize: 12,
+  },
+  buttonContainer: {
+    marginHorizontal: 30,
   },
 });
 export default styles;

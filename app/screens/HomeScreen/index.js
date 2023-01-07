@@ -7,6 +7,7 @@
 import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import HomeScreen from './HomeScreen';
+import * as appActions from '../../actions/appActions';
 
 class HomeScreenContainer extends Component {
   constructor(props) {
@@ -19,11 +20,24 @@ class HomeScreenContainer extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    isLoading: state.loadingReducer.isLoading,
+    deviceIP:state.loadingReducer.deviceIP,
+    deviceName:state.loadingReducer.deviceName,
+    deviceMAC:state.loadingReducer.deviceMAC,
+  }
+
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    onRequestLogin: params => {
+      dispatch(appActions.onRequestLogin(params));
+    },
+    saveDeviceDetails: params => {
+      dispatch(appActions.saveDeviceDetails(params));
+    },
+  };
 }
 
 export default connect(

@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
     marginTop: statusBarHeight,
+
   },
   checkboxContainerStyle: {
     flexDirection: 'row',
