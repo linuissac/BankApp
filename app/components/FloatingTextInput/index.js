@@ -6,24 +6,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-// import {string, func, object, number} from 'prop-types';
 import Constants from '../../config/Constants';
 
 export default class FloatingTextInput extends Component {
-  // static propTypes = {
-  //   attrName: string.isRequired,
-  //   title: string.isRequired,
-  //   value: string.isRequired,
-  //   updateMasterState: func.isRequired,
-  //   keyboardType: string,
-  //   titleActiveSize: number, // to control size of title when field is active
-  //   titleInActiveSize: number, // to control size of title when field is inactive
-  //   titleActiveColor: string, // to control color of title when field is active
-  //   titleInactiveColor: string, // to control color of title when field is active
-  //   textInputStyles: object,
-  //   otherTextInputProps: object,
-  //   focus: string.isRequired,
-  // };
 
   static defaultProps = {
     keyboardType: 'default',

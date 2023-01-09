@@ -73,6 +73,7 @@ function MyTabs() {
         activeTintColor: Constants.APP_THEME_COLOR,
         inactiveTintColor: Constants.APP_GREY_COLOR,
         keyboardHidesTabBar: false,
+        tabBarActiveTintColor: Constants.APP_THEME_COLOR,
         backBehavior: 'none ',
       })}
    >

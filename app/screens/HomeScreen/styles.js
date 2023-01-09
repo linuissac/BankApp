@@ -7,7 +7,6 @@
 import {StyleSheet} from 'react-native';
 import Constants from '../../config/Constants';
 
-const ratio = 375 / 525; //0.7  imageWidth/imageHeight
 
 const minimumHeight = (Constants.SCREEN_HEIGHT * 70) / 100;
 
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: Constants.APP_WHITE_COLOR,
     textAlign: 'center',
-    marginTop: 3,
     fontWeight: '600',
   },
   logoSubTextStyle: {
@@ -82,6 +80,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginHorizontal: 30,
+  },
+  verticleLineStyle: {
+    height: 25,
+    width: 1,
+    backgroundColor: Constants.APP_WHITE_COLOR,
   },
 });
 export default styles;

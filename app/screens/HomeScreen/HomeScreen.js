@@ -56,29 +56,29 @@ class HomeScreen extends Component {
       this.setState({isInputFocused: false});
     });
     this._didTapOnCurrentLocation();
-    this.getIMEI();
+    // this.getIMEI();
   }
 
-  getIMEI = async () => {
-    try {
-      const granted = await request(PERMISSIONS.ANDROID.READ_PHONE_STATE, {
-        title: 'RAKBANK wants to READ_PHONE_STATE',
-        message: 'RAKBANKApp needs access to your personal data. ',
-      });
-      if (granted === RESULTS.GRANTED) {
-        const IMEI = require('react-native-imei');
-        IMEI.getImei().then(imeiList => {
-          this.setState({imei: imeiList});
-          console.log('IMEEEEIIIII', imeiList);
-        });
-        alert('Permission Granted.');
-      } else {
-        console.log('Permission Not Granted');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
+  // getIMEI = async () => {
+  //   try {
+  //     const granted = await request(PERMISSIONS.ANDROID.READ_PHONE_STATE, {
+  //       title: 'RAKBANK wants to READ_PHONE_STATE',
+  //       message: 'RAKBANKApp needs access to your personal data. ',
+  //     });
+  //     console.log("Per",granted)
+  //     if (granted === RESULTS.GRANTED) {
+  //       const IMEI = require('react-native-imei');
+  //       IMEI.getImei().then(imeiList => {
+  //         this.setState({imei: imeiList});
+  //         console.log('IMEEEEIIIII', imeiList);
+  //       });
+  //     } else {
+  //       console.log('Permission Not Granted');
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  // };
 
   _didTapOnBackButton = () => {
     this.setState({
@@ -234,14 +234,8 @@ class HomeScreen extends Component {
   };
 
   _renderLoginForm = () => {
-    const {
-      userID,
-      password,
-      showPassword,
-      rememberLogin,
-      isInputFocused,
-      isLoginModeEnabled,
-    } = this.state;
+    const {userID, password, showPassword, rememberLogin, isInputFocused} =
+      this.state;
 
     return (
       <View style={{marginTop: isInputFocused ? 40 : 0}}>
@@ -316,6 +310,7 @@ class HomeScreen extends Component {
       </View>
     );
   };
+
   _renderButton = () => {
     const {isLoginModeEnabled} = this.state;
     let isDisabled = this.state.userID !== '' && this.state.password !== '';
@@ -356,7 +351,9 @@ class HomeScreen extends Component {
               style={styles.logoImageStyle}
               resizeMode={'contain'}
             />
-            <Text style={styles.logoTextStyle}>| RAK</Text>
+            <View style={styles.verticleLineStyle}></View>
+            <Text style={styles.logoTextStyle}>RAK</Text>
+
             <Text style={styles.logoSubTextStyle}>islamic</Text>
           </View>
 
@@ -373,7 +370,6 @@ class HomeScreen extends Component {
   render() {
     const {isLoginModeEnabled, isInputFocused} = this.state;
     const {isLoading} = this.props;
-    let isDisabled = this.state.userID !== '' && this.state.password !== '';
 
     return (
       <>
